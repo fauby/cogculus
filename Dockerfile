@@ -8,6 +8,8 @@ RUN npm run build
 FROM golang:1.26-alpine AS go
 WORKDIR /src
 COPY go.mod *.go ./
+COPY ratio ratio
+COPY api api
 COPY --from=web /web/dist web/dist
 RUN go test ./... && CGO_ENABLED=0 go build -o /fixie-ratio .
 

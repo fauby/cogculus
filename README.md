@@ -4,7 +4,9 @@
 
 A fixed gear ratio site: gear inches, development, speed and skid patches for any chainring and cog, with setups to explore, A/B comparison, a skid patch matrix, a cadence chart and a saved-setups garage.
 
-- `main.go` — Go server: calculations, JSON API and the embedded frontend
+- `ratio/` — calculations and JSON API handlers (shared)
+- `main.go` — Go server for Docker: API plus the embedded frontend
+- `api/` — Vercel serverless functions for `/api/ratio` and `/api/ratios`
 - `web/` — React (Vite) frontend using `@material/web`
 
 ## API
@@ -30,3 +32,7 @@ cd web && npm install && npm run build && cd .. && go run .
 ```
 
 For live reload, run `npm run dev` in `web/`; it proxies `/api` to `localhost:8090`.
+
+## Deploy
+
+Vercel is connected to this repo: every push to `main` deploys to production, other branches get preview URLs. `vercel.json` builds `web/` and serves `web/dist`.
